@@ -20,7 +20,7 @@
             >
         </div>
         <ul>
-            <li v-for="movie in movies">
+            <li v-for="movie in filteredMovies">
                 <img v-bind:src="movie.image">
                 <p>{{movie.title}}</p>
             </li>
