@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <div id="main">
+    <h1>영화 추천해드립니다</h1>
+    <div id="cgv" class="container">
+      <div class="row">
+        <div class="input-group col-3">
+          <select class="custom-select" id="inputGroupSelect04" aria-label="select type" v-model="cgv_type">
+            <option selected value="1">예매율순</option>
+            <option value="2">평점순</option>
+            <option value="3">관람객순</option>
+          </select>
+          <!-- <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" v-on:click="get_cgv">Button</button>
+          </div> -->
+        </div>
+        <div class="input-group col-3">
+          <select class="custom-select" id="inputGroupSelect04" aria-label="select type" v-model="gender">
+            <option selected value="1">남자</option>
+            <option value="2">여자</option>
+          </select>
+          <!-- <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" v-on:click="get_cgv">Button</button>
+          </div> -->
+        </div>
+        <div class="input-group col-3">
+          <select class="custom-select" id="inputGroupSelect04" aria-label="select type" v-model="age">
+            <option selected value="1">10대</option>
+            <option value="2">20대</option>
+            <option value="3">30대</option>
+            <option value="4">40대</option>
+            <option value="5">50대</option>
+          </select>
+        </div>
+        <div class="input-group-append col-3">
+          <button class="btn btn-outline-secondary" type="button" v-on:click="get_cgv">Button</button>
+        </div>
+
+      </div>
+      
+    </div>
+    <div id="naver">
+
+    </div>
+
+  </div>
+  <script>
+    const app = new Vue({
+      el: '#main',
+      data: {
+        cgv_url: 'https://final-movie-hzzle.c9users.io/api/v1/cgv/',
+        naver_url: 'https://final-movie-hzzle.c9users.io/api/v1/naver/',
+        cgv_type:1,
+        naver_type:1,
+        gender: 1,
+        age: 1,
+        chart = [],
+      },
+      methods: {
+        get_cgv: function(){
+          console.log(this.cgv_type, this.gender, this.age)
+        }
+      },
+      created: function () {
+        axios.get(`${this.cgv_url}${this.gender}/${this.age}/`)
+          .then(response => {
+            this.chart = response.data
+          })
+      }
+    })
+  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
